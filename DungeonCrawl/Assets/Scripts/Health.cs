@@ -17,6 +17,7 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//reduces health
 		if (Input.GetKeyDown (KeyCode.H)) {
 			if(heart3.fillAmount == 1){
 				heart3.fillAmount = .5f;
