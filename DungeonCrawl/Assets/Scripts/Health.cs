@@ -36,6 +36,7 @@ public class Health : MonoBehaviour {
 			}
 			else if(heart1.fillAmount == .5f && heart2.fillAmount == 0f){
 				heart1.fillAmount = 0f;
+				Application.LoadLevel("decisionScreen");
 			}
 		}
 	
