@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
-public class Button : MonoBehaviour {
+public class Restart : MonoBehaviour {
 	
 
-
+	public GameObject restartButton;
+	
+	
 	void Start() {
-
+	
 	}
-
+	
 	void Update(){
 
 	}
+
 	public void menuButton()
 	{
 		Application.LoadLevel("Level1");
