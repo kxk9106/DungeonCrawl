@@ -493,7 +493,7 @@ MonoBehaviour:
 GameObject:
   m_PrefabParentObject: {fileID: 149790, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
   m_PrefabInternal: {fileID: 1296137216}
---- !u!114 &1070333730
+--- !u!114 &1070333728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  swordButton: {fileID: 1797791925}
+  swordButton: {fileID: 1797791923}
 --- !u!114 &1070333731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 50f4f6286a19146098df7c1c8fc8998a, type: 3}
         m_MethodName: 
         m_Mode: 1
         m_Arguments:

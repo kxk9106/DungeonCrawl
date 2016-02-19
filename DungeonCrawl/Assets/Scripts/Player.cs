@@ -11,11 +11,12 @@ public class Player : MonoBehaviour {
 	Camera viewCamera;
 	PlayerController controller;
 
-	public Button swordButton;
+	public GameObject swordButton;
 
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
 		viewCamera = Camera.main;
+		//swordButton = GameObject.Find ("swordButton");
 	}
 	
 	void Update () {
