@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent (typeof (PlayerController))]
@@ -10,9 +11,12 @@ public class Player : MonoBehaviour {
 	Camera viewCamera;
 	PlayerController controller;
 
+	public GameObject swordButton;
+
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
 		viewCamera = Camera.main;
+		//swordButton = GameObject.Find ("swordButton");
 	}
 	
 	void Update () {
@@ -37,5 +41,14 @@ public class Player : MonoBehaviour {
 		//weapon input
 		if (Input.GetMouseButton (0)) {
 		}
+	}
+
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.tag == "sword") {
+			Destroy (other.gameObject);
+			Debug.Log ("Destroy");
+			swordButton.GetComponent<Image>().color = Color.red;
+		} 
+		
 	}
 }
