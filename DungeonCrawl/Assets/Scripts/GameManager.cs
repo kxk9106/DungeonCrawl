@@ -98,11 +98,9 @@ public class GameManager : MonoBehaviour
         //inverting the array because I dont feel like building maps upside down
         for (int y = 0, k = (tempMap.GetLength(0)) - 1; y < tempMap.GetLength(0); y++, k--)
         {
-            Debug.Log(tempMap.GetLength(0) + "," + tempMap.GetLength(1));
 
             for (int x = 0; x < tempMap.GetLength(1); x++)
             {
-                Debug.Log("x: " + x + "  y: " + y + "  k: " + k);
                 Map[x, y] = tempMap[k, x];
             }
 
