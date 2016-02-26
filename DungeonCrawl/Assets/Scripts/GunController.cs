@@ -7,7 +7,7 @@ public class GunController : MonoBehaviour {
 	public Gun startingGun;
 	Gun equippedGun;
 	
-	void Start() {
+	void Awake() {
 		if (startingGun != null) {
 			EquipGun(startingGun);
 		}
@@ -19,6 +19,7 @@ public class GunController : MonoBehaviour {
 		}
 		equippedGun = Instantiate (gunToEquip, weaponHold.position,weaponHold.rotation) as Gun;
 		equippedGun.transform.parent = weaponHold;
+		equippedGun.tag = "bow";
 	}
 	
 	public void Shoot() {

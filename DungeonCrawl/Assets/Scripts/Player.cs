@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	GunController gunController;
 
 	public GameObject swordButton;
+	public GameObject arrowButton;
 	private float swingDuration = 0.2f;
 	private float swingSpeed = 0.4f;
 	
@@ -23,12 +24,20 @@ public class Player : MonoBehaviour {
 	private bool swinging = false;
 	private Vector3 startRot;
 
+	private bool swordTime = true;
+	private bool bowTime = false;
+
+	private GameObject sword;
+	private GameObject bow;
+
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
 		gunController = GetComponent<GunController> ();
 		viewCamera = Camera.main;
 		//swordButton = GameObject.Find ("swordButton");
 		startRot = transform.eulerAngles;
+		sword = GameObject.FindGameObjectWithTag ("sword");
+		bow = GameObject.FindGameObjectWithTag ("bow");
 	}
 
 	
@@ -54,12 +63,34 @@ public class Player : MonoBehaviour {
 		}
 
 		//weapon input
-		if (Input.GetMouseButton (0)) {
-			gunController.Shoot();
-		}
 
-		if (Input.GetKeyDown (KeyCode.M)) {
-			swinging = true;
+
+
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			swordTime = true;
+			bowTime = false;
+		}
+		if (swordTime == true) {
+			swordButton.GetComponent<Image>().color = Color.red;
+			arrowButton.GetComponent<Image>().color = Color.white;
+			sword.SetActive(true);
+			bow.SetActive(false);
+			if (Input.GetMouseButton(0)) {
+				swinging = true;
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			bowTime = true;
+			swordTime = false;
+		}
+		if (bowTime == true) {
+			swordButton.GetComponent<Image>().color = Color.white;
+			arrowButton.GetComponent<Image>().color = Color.red;
+			sword.SetActive(false);
+			bow.SetActive(true);
+			if (Input.GetMouseButton (0)) {
+				gunController.Shoot();
+			}
 		}
 		
 		if (swinging) {
