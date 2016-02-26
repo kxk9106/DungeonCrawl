@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent (typeof (PlayerController))]
+[RequireComponent (typeof (GunController))]
 
 public class Player : MonoBehaviour {
 	//Sword swinging reference
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour {
 	
 	Camera viewCamera;
 	PlayerController controller;
+	GunController gunController;
 
 	public GameObject swordButton;
 	private float swingDuration = 0.2f;
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour {
 
 		//weapon input
 		if (Input.GetMouseButton (0)) {
+			gunController.Shoot();
 		}
 
 		if (Input.GetKeyDown (KeyCode.M)) {
