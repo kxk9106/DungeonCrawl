@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
 
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
+		gunController = GetComponent<GunController> ();
 		viewCamera = Camera.main;
 		//swordButton = GameObject.Find ("swordButton");
 		startRot = transform.eulerAngles;
