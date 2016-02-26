@@ -19,6 +19,7 @@ public class GunController : MonoBehaviour {
 		}
 		equippedGun = Instantiate (gunToEquip, weaponHold.position,weaponHold.rotation) as Gun;
 		equippedGun.transform.parent = weaponHold;
+		equippedGun.transform.localEulerAngles = new Vector3(0,180,0);
 		equippedGun.tag = "bow";
 	}
 	
