@@ -111,7 +111,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision other){
+	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "sword") {
 			//Destroy (other.gameObject);
 			//Debug.Log ("Destroy");
