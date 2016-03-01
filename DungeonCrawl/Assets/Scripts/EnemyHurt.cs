@@ -16,7 +16,7 @@ public class EnemyHurt : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "sword") {
 			Destroy(this.gameObject);
-			Debug.Log("ESjfoisejfoiesj");
+			Debug.Log("Destroy called");
 		} 
 		Debug.Log (other.gameObject.tag);
 		
