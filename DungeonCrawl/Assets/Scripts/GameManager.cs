@@ -36,23 +36,18 @@ public class GameManager : MonoBehaviour
                     Quaternion rot = Quaternion.Euler(0, 0, 0);
                     GameObject.Instantiate(WallPrefab, pos, rot);
                 }
+                else if (Map[x, yOrzOrWhatEver] == 'x')
+                {
+                    pos = new Vector3((float)((x * 5) + 2.5), 1f, (float)((yOrzOrWhatEver * 5) + 2.5));
+                    Quaternion rot = Quaternion.Euler(0, 0, 0);
+                    /*EnemyList[yOrzOrWhatEver] = (GameObject)*/
+                    GameObject.Instantiate(EnemyPrefab, pos, rot);
+                }
             }
         }
 
         
-        for (int yOrzOrWhatEver = 0; yOrzOrWhatEver < Map.GetLength(1); yOrzOrWhatEver++)
-        {
-            for (int x = 0; x < Map.GetLength(0); x++)
-            {
-                if (Map[x, yOrzOrWhatEver] == 'x')
-                {
-                    pos = new Vector3((float)((x * 5) + 2.5), 1f, (float)((yOrzOrWhatEver * 5) + 2.5));
-                    Quaternion rot = Quaternion.Euler(0, 0, 0);
-                    /*EnemyList[yOrzOrWhatEver] = (GameObject)*/GameObject.Instantiate(EnemyPrefab, pos, rot);
-
-                }
-            }
-        }
+        
 
         //for (int i=0; i< howMany; i++) 
         //{
