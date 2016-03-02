@@ -2,10 +2,13 @@
 using System.Collections;
 
 public class EnemyHurt : MonoBehaviour {
+	GameObject play;
+	Player plScript;
 
 	// Use this for initialization
 	void Start () {
-	
+		plScript = FindObjectOfType (typeof(Player)) as Player;
+		//Debug.Log (plScript.swinging);
 	}
 	
 	// Update is called once per frame
@@ -14,7 +17,7 @@ public class EnemyHurt : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (other.gameObject.tag == "sword") {
+		if (other.gameObject.tag == "sword" && plScript.StopSwinging() == true) {
 			Destroy(this.gameObject);
 			Debug.Log("Destroy called");
 		} 

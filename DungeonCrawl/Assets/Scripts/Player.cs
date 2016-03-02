@@ -21,14 +21,16 @@ public class Player : MonoBehaviour {
 	private float swingSpeed = 0.4f;
 	
 	private float swingTimer = 0f;
-	private bool swinging = false;
+	//public bool swinging = false;
 	private Vector3 startRot;
 
 	private bool swordTime = true;
 	private bool bowTime = false;
+	public bool swi = false;
 
 	private GameObject sword;
 	private GameObject bow;
+	public Animator ani;
 
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
@@ -38,6 +40,12 @@ public class Player : MonoBehaviour {
 		startRot = transform.eulerAngles;
 		sword = GameObject.FindGameObjectWithTag ("sword");
 		bow = GameObject.FindGameObjectWithTag ("bow");
+
+		sword.transform.localEulerAngles = new Vector3(0,90,50);
+		sword.transform.position =  GameObject.FindGameObjectWithTag("hold").transform.position;
+		sword.transform.SetParent(this.transform);
+		//ani = GetComponent<Animator> ();
+
 	}
 
 	
@@ -76,7 +84,9 @@ public class Player : MonoBehaviour {
 			sword.SetActive(true);
 			bow.SetActive(false);
 			if (Input.GetMouseButton(0)) {
-				swinging = true;
+				//swinging = true;
+				//ani.SetTrigger("Swinging");
+				ani.SetBool("isSwinging", true);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
@@ -93,22 +103,28 @@ public class Player : MonoBehaviour {
 			}
 		}
 		
-		if (swinging) {
+		/*if (swinging) {
 			swingTimer += Time.deltaTime;
 			
 			if (swingTimer < (swingDuration / 2)) {
-				transform.eulerAngles = Vector3.Lerp(startRot, new Vector3(0, 0, 1), swingSpeed);
+				transform.eulerAngles = Vector3.Lerp(new Vector3(0,-1,0), new Vector3(0, 1, 0), swingSpeed);
 			}
 			
 			if (swingTimer > (swingDuration / 2)) {
-				transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, startRot, swingSpeed);
+				transform.eulerAngles = Vector3.Lerp(new Vector3(0,1,0), new Vector3(0, -1, 0), swingSpeed);
 			}
 			
 			if (swingTimer > swingDuration) {
 				swingTimer = 0f;
 				swinging = false;
 			}
-		}
+		}*/
+	}
+
+	public bool StopSwinging()
+	{
+		swi = ani.GetBool ("isSwinging");
+		return swi;
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -116,9 +132,7 @@ public class Player : MonoBehaviour {
 			//Destroy (other.gameObject);
 			//Debug.Log ("Destroy");
 			swordButton.GetComponent<Image>().color = Color.red;
-			other.transform.localEulerAngles = new Vector3(0,90,50);
-			other.transform.position =  GameObject.FindGameObjectWithTag("hold").transform.position;
-			other.transform.SetParent(this.transform);
+
 		} 
 		
 	}
