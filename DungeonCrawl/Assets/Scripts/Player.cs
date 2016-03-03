@@ -31,10 +31,16 @@ public class Player : MonoBehaviour {
 	private GameObject sword;
 	private GameObject bow;
 	public Animator ani;
+	GameObject moneyText;
+	Text mText;
+	public int money = 0;
 
 	protected   void  Start () {
 		controller = GetComponent<PlayerController> ();
 		gunController = GetComponent<GunController> ();
+
+		moneyText = GameObject.FindGameObjectWithTag ("money");
+		mText = moneyText.GetComponent<Text> ();
 		viewCamera = Camera.main;
 		//swordButton = GameObject.Find ("swordButton");
 		startRot = transform.eulerAngles;
@@ -127,13 +133,14 @@ public class Player : MonoBehaviour {
 		return swi;
 	}
 
-	void OnTriggerEnter(Collider other){
-		if (other.gameObject.tag == "sword") {
-			//Destroy (other.gameObject);
-			//Debug.Log ("Destroy");
-			swordButton.GetComponent<Image>().color = Color.red;
-
-		} 
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.tag == "coin") {
+			Destroy(other.gameObject);
+			money ++;
+			mText.text = "Money: " + money;;
+			Debug.Log("Getmoney");
+		}
+		Debug.Log ("collindijg");
 		
 	}
 }

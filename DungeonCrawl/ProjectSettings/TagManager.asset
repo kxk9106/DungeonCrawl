@@ -8,6 +8,9 @@ TagManager:
   - startButton
   - hold
   - bow
+  - wall
+  - coin
+  - money
   layers:
   - Default
   - TransparentFX
