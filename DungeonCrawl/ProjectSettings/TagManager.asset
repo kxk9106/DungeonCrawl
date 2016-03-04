@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - MainGo
   - sword
   - startButton
   - hold
@@ -11,14 +12,10 @@ TagManager:
   - wall
   - coin
   - money
-<<<<<<< HEAD
-  - MainGo
-=======
   - projectile
   - healthAmt
   - enemyB
   - MainCameraStore
->>>>>>> 72beac885b4732383f47bc7127866a522f2fd387
   layers:
   - Default
   - TransparentFX
@@ -28,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - sword
+  - 
   - 
   - 
   - 
