@@ -4,7 +4,11 @@ using System.Collections;
 public class EnemyHurt : MonoBehaviour {
 	GameObject play;
 	Player plScript;
-	public int enemyHealth;
+	public double enemyHealth;
+
+	void Awake(){
+		DontDestroyOnLoad (transform.gameObject);
+	}
 	
 
 	// Use this for initialization

@@ -9,9 +9,7 @@ public class Health2 : MonoBehaviour {
 	public Image heart3;
 	PlayerAgain plScript;
 
-	void Awake(){
-		DontDestroyOnLoad (transform.gameObject);
-	}
+
 
 	
 	// Use this for initialization

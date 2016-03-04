@@ -13,6 +13,7 @@ TagManager:
   - money
   - projectile
   - healthAmt
+  - enemyB
   layers:
   - Default
   - TransparentFX

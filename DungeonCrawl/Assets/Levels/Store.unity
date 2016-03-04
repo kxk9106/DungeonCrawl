@@ -259,7 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 752140696}
-  weaponText: {fileID: 0}
+  weaponText: {fileID: 1080477232}
+  moneyText: {fileID: 1544645868}
 --- !u!114 &315235351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPow: {fileID: 1080477232}
+  enmHealth: 0
 --- !u!1 &446143425
 GameObject:
   m_ObjectHideFlags: 0

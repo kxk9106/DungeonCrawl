@@ -17,7 +17,7 @@ public class Telepad : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "Player") {
-			Application.LoadLevelAdditive ("Store");
+			Application.LoadLevel ("Store");
 			cam.GetComponent<CameraController> ().enabled = false;
 			Time.timeScale = 0;
 		}

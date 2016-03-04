@@ -33,19 +33,24 @@ public class PlayerAgain : MonoBehaviour {
 	public Animator ani;
 	GameObject moneyText;
 	Text mText;
-	public int money = 0;
+	public int money;
 	
 	Health2 hltScript;
 	IncreaseHealth incHealthScript;
 	public double playerHealth;
+	StoreStuff stScript;
+
+	GameObject maStoreCam;
 	
-	/*void Awake(){
-		DontDestroyOnLoad (transform.gameObject);
-	}*/
+
 	
 	void  Start () {
-		
-		
+		maStoreCam = GameObject.FindGameObjectWithTag ("MainCameraStore");
+		Destroy (maStoreCam);
+		stScript = FindObjectOfType (typeof(StoreStuff)) as StoreStuff;
+		money = 5;
+		//money = System.Int32.Parse (stScript.moneyText.text);
+		//Debug.Log ("Money is " + money);
 		controller = GetComponent<PlayerController> ();
 		gunController = GetComponent<GunController> ();
 		
@@ -80,6 +85,7 @@ public class PlayerAgain : MonoBehaviour {
 	// Update is called once per frame
 	
 	void Update () {
+		mText.text = "Money: " + money.ToString();
 		
 		//Movement input
 		Vector3 moveInput = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical"));
