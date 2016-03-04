@@ -131,6 +131,10 @@ public class Player : MonoBehaviour {
 			hltScript.takeHeart();
 			//Debug.Log (playerHealth);
 		}
+		if (playerHealth <= 0) {
+			Destroy(this.gameObject);
+			Application.LoadLevel("decisionScreen");
+		}
 	}
 
 	public bool StopSwinging()
@@ -141,10 +145,15 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other){
 		if (other.gameObject.tag == "coin") {
-			Destroy(other.gameObject);
+			Destroy (other.gameObject);
 			money ++;
-			mText.text = "Money: " + money;;
-			Debug.Log("Getmoney");
+			mText.text = "Money: " + money;
+			;
+			Debug.Log ("Getmoney");
+		} else if (other.gameObject.tag == "enemyB") {
+			playerHealth = playerHealth - 0.5;
+			hltScript.takeHeart();
+
 		}
 		Debug.Log ("colliding");
 		
