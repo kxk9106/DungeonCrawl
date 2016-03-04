@@ -2,16 +2,19 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour {
-
+public class Health2 : MonoBehaviour {
+	
 	public Image heart1;
 	public Image heart2;
 	public Image heart3;
-	Player plScript;
+	PlayerAgain plScript;
 
+
+
+	
 	// Use this for initialization
 	void Start () {
-		plScript = FindObjectOfType (typeof(Player)) as Player;
+		plScript = FindObjectOfType (typeof(PlayerAgain)) as PlayerAgain;
 		//heart1.fillAmount = 1;
 		//heart2.fillAmount = 1;
 		//heart3.fillAmount = 1;
@@ -19,8 +22,29 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-	
+		//reduces health
+		/*if (Input.GetKeyDown (KeyCode.H)) {
+			if(heart3.fillAmount == 1){
+				heart3.fillAmount = .5f;
+			}
+			else if(heart3.fillAmount == .5f){
+				heart3.fillAmount = 0f;
+			}
+			else if(heart2.fillAmount == 1 && heart3.fillAmount == 0f){
+				heart2.fillAmount = .5f;
+			}
+			else if(heart2.fillAmount == .5f && heart3.fillAmount == 0f){
+				heart2.fillAmount = 0f;
+			}
+			else if(heart1.fillAmount == 1 && heart2.fillAmount == 0f){
+				heart1.fillAmount = .5f;
+			}
+			else if(heart1.fillAmount == .5f && heart2.fillAmount == 0f){
+				heart1.fillAmount = 0f;
+				Application.LoadLevel("decisionScreen");
+			}
+		}*/
+		
 	}
 	public void takeHeart()
 	{
@@ -57,3 +81,4 @@ public class Health : MonoBehaviour {
 		}
 	}
 }
+

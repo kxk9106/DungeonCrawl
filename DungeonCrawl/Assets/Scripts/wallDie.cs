@@ -18,9 +18,14 @@ public class wallDie : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other){
-		if (other.gameObject.tag == "sword" && plScript.StopSwinging() == true) {
-			wallHealth --;
+		if (other.gameObject.tag == "sword" && plScript.StopSwinging () == true) {
+			wallHealth--;
 			Debug.Log (wallHealth);
+		} else if (other.gameObject.tag == "projectile") {
+			wallHealth--;
+			Destroy (other.gameObject);
+
+		}
 			if(wallHealth < 1)
 			{
 				coin = Instantiate(Resources.Load("coin")) as GameObject;
@@ -33,7 +38,6 @@ public class wallDie : MonoBehaviour {
 
 			}
 
-		} 
 		Debug.Log (other.gameObject.tag);
 		
 	}

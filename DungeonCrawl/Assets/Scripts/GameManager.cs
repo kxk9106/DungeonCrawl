@@ -75,11 +75,6 @@ public class GameManager : MonoBehaviour
 
 
 
-
-
-
-
-
     /// <summary>
     ///generate a map and save it to reference later
     /// </summary>

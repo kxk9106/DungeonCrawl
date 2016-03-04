@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class GunController : MonoBehaviour {
-	
+
 	public Transform weaponHold;
 	public Gun startingGun;
 	Gun equippedGun;
-	
+
 	void Awake() {
 		if (startingGun != null) {
 			EquipGun(startingGun);
 		}
 	}
-	
+
 	public void EquipGun(Gun gunToEquip) {
 		if (equippedGun != null) {
 			Destroy(equippedGun.gameObject);
@@ -22,7 +22,7 @@ public class GunController : MonoBehaviour {
 		equippedGun.transform.localEulerAngles = new Vector3(0,180,0);
 		equippedGun.tag = "bow";
 	}
-	
+
 	public void Shoot() {
 		if (equippedGun != null) {
 			equippedGun.Shoot();

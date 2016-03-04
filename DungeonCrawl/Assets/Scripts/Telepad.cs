@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillWall : MonoBehaviour {
+public class Telepad : MonoBehaviour {
 
-	//public GameObject player;
+	public GameObject cam;
 
 	// Use this for initialization
 	void Start () {
-	//Collider col = player.GetComponent<Collider>();
+		cam = GameObject.FindGameObjectWithTag ("MainCamera");
 
 	}
 	
@@ -15,11 +15,11 @@ public class KillWall : MonoBehaviour {
 	void Update () {
 	
 	}
-
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "Player") {
-			Destroy(other.gameObject);
-			Application.LoadLevel("decisionScreen");
+			Application.LoadLevel ("Store");
+			cam.GetComponent<CameraController> ().enabled = false;
+			Time.timeScale = 0;
 		}
 	}
 }

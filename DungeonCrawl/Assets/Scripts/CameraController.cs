@@ -4,6 +4,8 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 	public bool moveOn;
 
+
+
 	// Use this for initialization
 	void Start () {
 		moveOn = true;
