@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 	public Animator ani;
 	GameObject moneyText;
 	Text mText;
-	public int money = 0;
+	public int money;
 
 	Health hltScript;
 	public double playerHealth;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 
 	protected   void  Start () {
 
-
+		money = 31;
 		controller = GetComponent<PlayerController> ();
 		gunController = GetComponent<GunController> ();
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
 
 		playerHealth = 3.0;
 
-
+		mText.text = "Money: " + money; 
 		hltScript = FindObjectOfType (typeof(Health)) as Health;
 		hltScript.takeHeart ();
 

@@ -6,6 +6,7 @@ using System.Collections;
 public class WeaponPower : MonoBehaviour {
 
 	EnemyHurt enScript;
+	Player ps;
 	public Text weaponPow;
 	public double enmHealth;
 
@@ -17,6 +18,7 @@ public class WeaponPower : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		enScript = FindObjectOfType (typeof(EnemyHurt)) as EnemyHurt;
+		ps = FindObjectOfType (typeof(Player)) as Player;
 		enmHealth = 6 - enScript.enemyHealth;
 		weaponPow.text = "Weapon Power: " + enmHealth;
 	}
@@ -27,6 +29,13 @@ public class WeaponPower : MonoBehaviour {
 	}
 
 	public void weaponStrong(){
+		if (ps.money > 15) {
+			ps.money -=15;
+			weaponStrongReal();
+		}
+	}
+
+	public void weaponStrongReal(){
 		Debug.Log ("Ys");
 		enScript.enemyHealth --;
 		enmHealth = 6 - enScript.enemyHealth;

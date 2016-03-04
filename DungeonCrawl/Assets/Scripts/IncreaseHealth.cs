@@ -23,6 +23,15 @@ public class IncreaseHealth : MonoBehaviour {
 	}
 
 	public void changeHealth(){
+		if (plScript.money > 15) {
+			plScript.money -= 15;
+			changeHealthReal();
+
+		}
+
+	}
+
+	void changeHealthReal(){
 		plScript.playerHealth++;
 		plTempHealth.text = "Health: " + plScript.playerHealth;
 		if(plTempHealth.text.Contains("3")){
@@ -53,7 +62,6 @@ public class IncreaseHealth : MonoBehaviour {
 			//plAScript.playerHealth = 0;
 			temp = 0;
 		}
-
 	}
 	
 	// Update is called once per frame
