@@ -11,6 +11,7 @@ TagManager:
   - wall
   - coin
   - money
+  - MainGo
   layers:
   - Default
   - TransparentFX

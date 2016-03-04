@@ -3,14 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class StudentMovement : MonoBehaviour {
+public class AStarMovement : MonoBehaviour {
 
 	//setup
-	public int[] target;
-	public int[] start;
 
+    /// <summary>
+    /// Target position
+    /// </summary>
+    int[] target = new int[2];
+
+    /// <summary>
+    /// Start position
+    /// </summary>
+	int[] start = new int[2];
+
+    public char[,] Map = new char[10, 18];
 	public GameObject Point;
-	public  GameObject[] DirCube;
+	public GameObject[] DirCube;
 
 
 
@@ -24,33 +33,23 @@ public class StudentMovement : MonoBehaviour {
 
 	
 	GameManager InstanceOfGameManager;
+    GameObject InstanceOfPlayer;
 	
 
 
 	void Awake ()
 	{
-		//InstanceOfGameManager = GameObject.Find("MainGO").GetComponent<GameManager>();
-		//InstanceOfGameManager = GameObject.FindGameObjectsWithTag("Main").GetComponent<GameManager>(); //This methode of selecting the game object was used previously but seems to be deprecated now
 		InstanceOfGameManager = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<GameManager>();
+        //InstanceOfPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
 	}
 
 	// Use this for initialization
 	void Start () {
-		start = new int[2];
-		start [0] = (int)transform.position.x;
-		start [1] = (int)transform.position.z;
-
-		
-		
-		target = new int[2]; //stores the target position
-		target = Randomlocation ();
-
-		CalculateAStar ();
-
-
+		//CalculateAStar ();
 
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -62,20 +61,34 @@ public class StudentMovement : MonoBehaviour {
     /// <summary>
     /// Calculates an AStar path to a target
     /// </summary>
-	void CalculateAStar()
+	public List<int[]> CalculateAStar(GameObject m_requester, char[,] m_Map)
 	{
+        target = new int[2];
+        start = new int[2];
+        Path = new List<int[]>(); //Holds the final path built from a series of points
 
+        OpenList = new Dictionary<int[], Tile>(new MyEqualityComparer());
+        ClosedList = new Dictionary<int[], Tile>(new MyEqualityComparer());
 
+        Map = m_Map;
+        InstanceOfPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
+
+		start [0] = ((int)m_requester.transform.position.x / 5);
+		start [1] = ((int)m_requester.transform.position.z / 5);
+        
+        target[0] = ((int)InstanceOfPlayer.transform.position.x / 5);
+        target[1] = ((int)InstanceOfPlayer.transform.position.z / 5);
+        
 		Tile firstNode = new Tile (start, target, start, 0);
 		OpenList.Add (firstNode.coordinates, firstNode); //place root node on the open list
 
 		//int cycles = 0;
-		while (!(ClosedList.ContainsKey(target))) //function stops when the path leads to the target
+		while ((!(ClosedList.ContainsKey(target))) && (OpenList.Count > 0)) //function stops when the path leads to the target
 		{
 			//cycles++;
 
-
-			int low = 74612638; //holds the current path efficiency recordto be checked against (starts out with a massive place holder record)
+            
+			int low = 74612638; //holds the current path efficiency record to be checked against (starts out with a massive place holder record)
 			int[] lowKey = new int[2]; //holds the location of the tile in the open list that currently has the cheapest path
 			foreach (KeyValuePair<int[], Tile> elem in OpenList) //search for lowest cost tile
 			{
@@ -90,21 +103,23 @@ public class StudentMovement : MonoBehaviour {
 
 
 			Tile temp55;
-			OpenList.TryGetValue(lowKey, out temp55);
+			bool well = OpenList.TryGetValue(lowKey, out temp55);
+            //Debug.Log("Well? " + well);
 			ClosedList.Add(lowKey,temp55);
 			OpenList.Remove(lowKey);
 
 
-			Tile Current;// = new Tile(new int[2], new int[2], new int[2], 0);
+			Tile Current = new Tile(new int[2], new int[2], new int[2], 0);
 
 
 			bool isthere = false;
 			isthere = ClosedList.TryGetValue(lowKey, out Current);
+            //Debug.Log("isThere?: " + isthere);
 
 
-
+            //Debug.Log("Current coordinates: " + Current.coordinates[0] + "," + Current.coordinates[1] + " Current Tile: " + Current.ToString());
             CheckSurroundings(Current.coordinates, Current); //check surrounding tiles
-
+            //Debug.Log("But did I make it here?");
             
 		}
 
@@ -119,22 +134,24 @@ public class StudentMovement : MonoBehaviour {
         {
             while (/*(Sorter.Previous != null) && */(Sorter.Previous[0] != Sorter.coordinates[0]) || (Sorter.Previous[1] != Sorter.coordinates[1])) //The path head points to itself as the previous node, so the program checks for this to determine if its at the end
             {
-                if (true)
-                {
-                    Vector3 pos = new Vector3(Sorter.coordinates[0], 0f, Sorter.coordinates[1]);
-
-                    Quaternion rot = Quaternion.LookRotation(new Vector3(Sorter.Previous[0], 0f, Sorter.Previous[1]));
-                    GameObject.Instantiate(Point, pos, rot);
-                }
+                //if (true)
+                //{
+                //    Vector3 pos = new Vector3(Sorter.coordinates[0], 0f, Sorter.coordinates[1]);
+                //
+                //    Quaternion rot = Quaternion.LookRotation(new Vector3(Sorter.Previous[0], 0f, Sorter.Previous[1]));
+                //    GameObject.Instantiate(Point, pos, rot);
+                //}
                 
 
 
                 Path.Add((int[])Sorter.coordinates.Clone()); //adds the coordinates to the path (note: the resulting path is backwards at this stage)
+                //Debug.Log(Sorter.ToString());
                 ClosedList.TryGetValue(new int[] { Sorter.Previous[0], Sorter.Previous[1] }, out Sorter);
             }
             Path.Reverse(); //reverses the list so that slot 0 is the path head and the last item is the destination
         }
-
+        //Debug.Log(Path.ToString());
+        return Path;
 			
 
 		//for (int i = 0; i < Path.Count; i++)
@@ -154,19 +171,6 @@ public class StudentMovement : MonoBehaviour {
 	
 	
 
-	/// <summary>
-	/// This method polls a random room from the list to be used as a
-	/// classroom assignment.
-	/// </summary>
-	int[] Randomlocation ()
-	{
-		int[] m_randomRoom = new int[2];
-		int randomRoom = UnityEngine.Random.Range (0, 12);
-		m_randomRoom [0] = InstanceOfGameManager.locations [randomRoom, 0];
-		m_randomRoom [1] = InstanceOfGameManager.locations [randomRoom, 1];
-		
-		return(m_randomRoom);
-	}
 
 
     /// <summary>
@@ -174,6 +178,7 @@ public class StudentMovement : MonoBehaviour {
     /// </summary>
     void CheckSurroundings(int[] centerPosition, Tile m_current)
 	{
+        //Debug.Log("Current coordinates: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
 
         int[] posToCheck = {0,0};
         Array.Copy(centerPosition, posToCheck, 2);
@@ -240,11 +245,13 @@ public class StudentMovement : MonoBehaviour {
                     break;
 
                 default: // unexpected case handeling
-                    Debug.Log("Error: unexpected tile position request. expected integer betwenn 0 - 7");
+                    //Debug.Log("Error: unexpected tile position request. expected integer betwenn 0 - 7");
                     posToCheck[0] += -1;
                     posToCheck[1] += 1;
                     break;
             }
+            //Debug.Log("start");
+            //Debug.Log("pos to check: " + posToCheck[0] + "," + posToCheck[1]);
             
             exists = OpenList.TryGetValue(posToCheck, out checkingTile); //checks if the tile is on the open list and saves it in the active tile slot if it is.
 
@@ -262,16 +269,21 @@ public class StudentMovement : MonoBehaviour {
             else
             {
                 exists = ClosedList.TryGetValue(posToCheck, out checkingTile); //make sure the tile isn't already on the closed list
-                if (!(exists) && (InstanceOfGameManager.Map[posToCheck[0], posToCheck[1]] == 'e')) //confirms tile is not on the closed list and checks if the tile position is a valid space
+                //Debug.Log("Checking map at: " + posToCheck[0] + "," + posToCheck[1]);
+                //Debug.Log("Map: " + Map[posToCheck[0],posToCheck[1]]);
+                if (!(exists) && (Map[posToCheck[0], posToCheck[1]] != '1')) //confirms tile is not on the closed list and checks if the tile position is a valid space
                 {
+                    //Debug.Log("well did it even pass2?");
+                    //Debug.Log("Current coordinates3: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
                     Array.Copy(m_current.coordinates, centerPosition, 2);
+                    //Debug.Log("Current coordinates3: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
 
                     int cost = 10; //cost of moving to this tile
-                    if(i >= 4) //if diagonal
+                    if (i >= 4) //if diagonal
                     {
                         cost = 14; //this is a rounding of the extra move cost for traversing a diagonal (it ends up being more then a straight line but cutting the corner ends up still better then taking two straight lines)
                     }
-                    
+
                     OpenList.Add((int[])posToCheck.Clone(), new Tile((int[])posToCheck.Clone(), target, (int[])m_current.coordinates.Clone(), m_current.G + cost));
                 }
             }
