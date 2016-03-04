@@ -15,10 +15,6 @@ public class Gun : MonoBehaviour {
 		if (Time.time > nextShotTime) {
 			nextShotTime = Time.time + msBetweenShots / 1000;	
 			Projectile newProjectile = Instantiate (projectile, muzzle.position, muzzle.rotation) as Projectile;
-			//newProjectile.transform.localEulerAngles = new Vector3(0,90,90);
-			//newProjectile.transform.localEulerAngles = this.transform.rotation;
-			//newProjectile.transform.Rotate(Vector3.down,180,Space.World);
-
 			newProjectile.SetSpeed (muzzleVelocity);
 		}
 	}

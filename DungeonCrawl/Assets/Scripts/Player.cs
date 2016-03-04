@@ -108,23 +108,6 @@ public class Player : MonoBehaviour {
 				gunController.Shoot();
 			}
 		}
-		
-		/*if (swinging) {
-			swingTimer += Time.deltaTime;
-			
-			if (swingTimer < (swingDuration / 2)) {
-				transform.eulerAngles = Vector3.Lerp(new Vector3(0,-1,0), new Vector3(0, 1, 0), swingSpeed);
-			}
-			
-			if (swingTimer > (swingDuration / 2)) {
-				transform.eulerAngles = Vector3.Lerp(new Vector3(0,1,0), new Vector3(0, -1, 0), swingSpeed);
-			}
-			
-			if (swingTimer > swingDuration) {
-				swingTimer = 0f;
-				swinging = false;
-			}
-		}*/
 	}
 
 	public bool StopSwinging()
