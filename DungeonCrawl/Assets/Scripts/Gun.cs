@@ -5,7 +5,7 @@ public class Gun : MonoBehaviour {
 
 	public Transform muzzle;
 	public Projectile projectile;
-	public float msBetweenShots = 100;
+	public float msBetweenShots = 500;
 	public float muzzleVelocity = 35 ;
 
 	float nextShotTime;

@@ -40,8 +40,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172400}
-  m_LocalRotation: {x: -.500000119, y: -.5, z: .5, w: .49999994}
-  m_LocalPosition: {x: 0, y: 0, z: -.115000002}
+  m_LocalRotation: {x: -0.5000001, y: -0.5, z: 0.5, w: 0.49999994}
+  m_LocalPosition: {x: 0, y: 0, z: -0.115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 411528}
@@ -53,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.566, y: 2.30999994, z: 7.51000023}
-  m_LocalScale: {x: .738271713, y: 1, z: 5.70555592}
+  m_LocalPosition: {x: 22.566, y: 2.31, z: 7.51}
+  m_LocalScale: {x: 0.7382717, y: 1, z: 5.705556}
   m_Children:
   - {fileID: 402602}
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 402602}
   projectile: {fileID: 11421640, guid: 40986a00f29b4b84bb3b555ebd849a13, type: 2}
-  msBetweenShots: 100
+  msBetweenShots: 500
   muzzleVelocity: 35
 --- !u!1001 &100100000
 Prefab:
