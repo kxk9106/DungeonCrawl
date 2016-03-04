@@ -4,6 +4,10 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 	public bool moveOn;
 
+	void Awake(){
+		DontDestroyOnLoad (transform.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 		moveOn = true;
