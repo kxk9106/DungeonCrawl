@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 
 	protected   void  Start () {
 
-		money = 31;
+		money = 0;
 		controller = GetComponent<PlayerController> ();
 		gunController = GetComponent<GunController> ();
 

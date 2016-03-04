@@ -14,6 +14,7 @@ TagManager:
   - projectile
   - healthAmt
   - enemyB
+  - MainCameraStore
   layers:
   - Default
   - TransparentFX

@@ -29,8 +29,8 @@ public class WeaponPower : MonoBehaviour {
 	}
 
 	public void weaponStrong(){
-		if (ps.money > 15) {
-			ps.money -=15;
+		if (ps.money > 8) {
+			ps.money -=8;
 			weaponStrongReal();
 		}
 	}
