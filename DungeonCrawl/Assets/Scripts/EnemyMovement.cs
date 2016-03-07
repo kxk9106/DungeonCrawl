@@ -14,6 +14,8 @@ public class EnemyMovement : MonoBehaviour {
     public int HostilityDistance; //from how far away (path steps)will they actively seek you
     List<int[]> directions;
     int[] assumedPosition = new int[2];
+    //Stack<int[]> directionStack;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +38,6 @@ public class EnemyMovement : MonoBehaviour {
             //Debug.Log("Player position: " +(int)InstanceOfPlayer.transform.position.z / 5 + "," + (int)InstanceOfPlayer.transform.position.x / 5 + " Enemy Position: " + (int)this.gameObject.transform.position.z / 5 + "," + (int)this.gameObject.transform.position.x / 5);
             if (((int)InstanceOfPlayer.transform.position.z / 5 == (int)this.gameObject.transform.position.z / 5) && ((int)InstanceOfPlayer.transform.position.x / 5 == (int)this.gameObject.transform.position.x / 5))
             {
-                //Debug.Log("Im close!");
                 seekPlayer = true;
             }
             else
@@ -58,44 +59,50 @@ public class EnemyMovement : MonoBehaviour {
         {
             if (pathActive) //follow current path
             {
+                //if the path still ends where the player is
                 if ((assumedPosition[0] == (int)InstanceOfPlayer.transform.position.x / 5) && (assumedPosition[1] == (int)InstanceOfPlayer.transform.position.z / 5))
                 {
-                    if ((((int)this.transform.position.x) / 5 != ((int)InstanceOfPlayer.transform.position.x)  / 5) || ((int)this.transform.position.z / 5 != (int)InstanceOfPlayer.transform.position.z / 5))
+                    //if enemy is not at current destination
+                    if (/*((directions[currentPathTarget][0] < directions.ToArray().GetLength(0)) && (directions[currentPathTarget][1] < directions.ToArray().GetLength(1))) && */ (((int)this.transform.position.x) / 5 != directions[currentPathTarget][0]) || ((int)this.transform.position.z / 5 != directions[currentPathTarget][1]))//((((int)this.transform.position.x) / 5 != ((int)InstanceOfPlayer.transform.position.x) / 5) || ((int)this.transform.position.z / 5 != (int)InstanceOfPlayer.transform.position.z / 5))
                     {
-                        //Debug.Log(directions.ToArray().Length);
-                        foreach (int[] elem in directions)
-                        {
-                            //Debug.Log("List: " + elem[0] + "," + elem[1]);
-                        }
-                        
-                        this.gameObject.transform.LookAt(new Vector3((directions[currentPathTarget][0] * 5) + 2.5f, 1, (directions[currentPathTarget][1] * 5) + 2.5f));
+                        this.gameObject.transform.LookAt(new Vector3((directions[currentPathTarget][0] * 5) + 2.5f, 2, (directions[currentPathTarget][1] * 5) + 2.5f));
                         Vector3 forwardMovement = this.transform.forward;
                         forwardMovement.Scale(new Vector3(EnemySpeed, EnemySpeed, EnemySpeed));
                         this.transform.position += forwardMovement;
                     }
-                    else
+                    else //iterate to next point in path 
                     {
-                        //Debug.Log("before: " + currentPathTarget);
                         currentPathTarget++;
-                        //Debug.Log("before: " + currentPathTarget);
                     }
                 }
-                else
+                else //the path is flagged to be re-calculated
                 {
-                    Debug.Log("Path Deactive");
                     pathActive = false;
                 }
             }
             else //generate new path
             {
+                
+                
 
                 directions = InstanceOfGameManager.GetAStarList(this.gameObject);
                 pathActive = true;
-                currentPathTarget = directions.Count - 1;
+                currentPathTarget = 1;// = directions.Count - 1;
                 assumedPosition[0] = (int)InstanceOfPlayer.transform.position.x / 5;
                 assumedPosition[1] = (int)InstanceOfPlayer.transform.position.z / 5;
-                //Debug.Log(directions.Count);
 
+                /* //show path
+                foreach (int[] elem in directions)
+                {
+                    //elem[0]--;
+                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    Vector3 pos = new Vector3((elem[0] * 5) + 2.5f, 6, (elem[1] * 5) + 2.5f);
+                    Quaternion rot = Quaternion.LookRotation(new Vector3(0f, 0f, 0f));
+                    GameObject.Instantiate(cube, pos, rot);
+
+                    //directionStack.Pop(elem);
+                }
+                 */ 
             }
         }
 	

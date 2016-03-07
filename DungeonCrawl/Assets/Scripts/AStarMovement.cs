@@ -17,7 +17,7 @@ public class AStarMovement : MonoBehaviour {
     /// </summary>
 	int[] start = new int[2];
 
-    public char[,] Map = new char[10, 18];
+    public char[,] Map = new char[8, 18];
 	public GameObject Point;
 	public GameObject[] DirCube;
 
@@ -134,23 +134,23 @@ public class AStarMovement : MonoBehaviour {
         {
             while (/*(Sorter.Previous != null) && */(Sorter.Previous[0] != Sorter.coordinates[0]) || (Sorter.Previous[1] != Sorter.coordinates[1])) //The path head points to itself as the previous node, so the program checks for this to determine if its at the end
             {
-                //if (true)
-                //{
-                //    Vector3 pos = new Vector3(Sorter.coordinates[0], 0f, Sorter.coordinates[1]);
+
+                // Code to create an object at each point in the path
+                //Vector3 pos = new Vector3(Sorter.coordinates[0], 0f, Sorter.coordinates[1]);
                 //
-                //    Quaternion rot = Quaternion.LookRotation(new Vector3(Sorter.Previous[0], 0f, Sorter.Previous[1]));
-                //    GameObject.Instantiate(Point, pos, rot);
-                //}
+                //Quaternion rot = Quaternion.LookRotation(new Vector3(Sorter.Previous[0], 0f, Sorter.Previous[1]));
+                //GameObject.Instantiate(Point, pos, rot);
+
                 
 
 
                 Path.Add((int[])Sorter.coordinates.Clone()); //adds the coordinates to the path (note: the resulting path is backwards at this stage)
-                //Debug.Log(Sorter.ToString());
+
                 ClosedList.TryGetValue(new int[] { Sorter.Previous[0], Sorter.Previous[1] }, out Sorter);
             }
             Path.Reverse(); //reverses the list so that slot 0 is the path head and the last item is the destination
         }
-        //Debug.Log(Path.ToString());
+
         return Path;
 			
 
@@ -158,12 +158,6 @@ public class AStarMovement : MonoBehaviour {
 		//{
 		//	Debug.Log("The path: " + Path[i][0] + "," + Path[i][1]); //how to iterate through path
 		//}
-
-
-		//Debug.Log ("path count: " + Path.Count);
-
-
-
 		
 	}
 	
@@ -178,7 +172,6 @@ public class AStarMovement : MonoBehaviour {
     /// </summary>
     void CheckSurroundings(int[] centerPosition, Tile m_current)
 	{
-        //Debug.Log("Current coordinates: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
 
         int[] posToCheck = {0,0};
         Array.Copy(centerPosition, posToCheck, 2);
@@ -245,13 +238,11 @@ public class AStarMovement : MonoBehaviour {
                     break;
 
                 default: // unexpected case handeling
-                    //Debug.Log("Error: unexpected tile position request. expected integer betwenn 0 - 7");
+                    //Debug.Log("Error: unexpected tile position request. Expected integer between 0 - 7");
                     posToCheck[0] += -1;
                     posToCheck[1] += 1;
                     break;
             }
-            //Debug.Log("start");
-            //Debug.Log("pos to check: " + posToCheck[0] + "," + posToCheck[1]);
             
             exists = OpenList.TryGetValue(posToCheck, out checkingTile); //checks if the tile is on the open list and saves it in the active tile slot if it is.
 
@@ -269,14 +260,11 @@ public class AStarMovement : MonoBehaviour {
             else
             {
                 exists = ClosedList.TryGetValue(posToCheck, out checkingTile); //make sure the tile isn't already on the closed list
-                //Debug.Log("Checking map at: " + posToCheck[0] + "," + posToCheck[1]);
-                //Debug.Log("Map: " + Map[posToCheck[0],posToCheck[1]]);
-                if (!(exists) && (Map[posToCheck[0], posToCheck[1]] != '1')) //confirms tile is not on the closed list and checks if the tile position is a valid space
+
+                if (!(exists) && (posToCheck[0] >= 0) && (posToCheck[0] < Map.GetLength(0)) && (posToCheck[1] >= 0) && (posToCheck[1] < Map.GetLength(1)) && (Map[posToCheck[0], posToCheck[1]] != '1')) //confirms tile is not on the closed list and checks if the tile position is a valid space
                 {
-                    //Debug.Log("well did it even pass2?");
-                    //Debug.Log("Current coordinates3: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
+                    
                     Array.Copy(m_current.coordinates, centerPosition, 2);
-                    //Debug.Log("Current coordinates3: " + centerPosition[0] + "," + centerPosition[1] + " Current Tile: " + m_current.ToString());
 
                     int cost = 10; //cost of moving to this tile
                     if (i >= 4) //if diagonal
