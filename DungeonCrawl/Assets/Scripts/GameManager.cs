@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject EnemyPrefab;
     public GameObject[] EnemyList;
     public GameObject WallPrefab;
+    public GameObject IndustructibleWallPrefab;
 
     public int howMany;
 
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             for (int x = 0; x < Map.GetLength(0); x++)
             {
-                if (Map[x, yOrzOrWhatEver] == '1')
+                if (Map[x, yOrzOrWhatEver] == '2')
                 {
                     if (true)//(x > 0) && (x < 9))
                     {
@@ -47,6 +48,16 @@ public class GameManager : MonoBehaviour
                     Quaternion rot = Quaternion.Euler(0, 0, 0);
                     /*EnemyList[yOrzOrWhatEver] = (GameObject)*/
                     GameObject.Instantiate(EnemyPrefab, pos, rot);
+                }
+                else if (Map[x, yOrzOrWhatEver] == '1')
+                {
+                    if (true)//(x > 0) && (x < 9))
+                    {
+                        pos = new Vector3((float)((x * 5) + 2.5), 0f, (float)((yOrzOrWhatEver * 5) + 2.5));
+                        //Debug.Log("POS: (" + pos.x + "," + pos.y + "," + pos.z + ")");
+                        Quaternion rot = Quaternion.Euler(0, 0, 0);
+                        GameObject.Instantiate(IndustructibleWallPrefab, pos, rot);
+                    }
                 }
             }
         }
@@ -89,7 +100,7 @@ public class GameManager : MonoBehaviour
                 {'x','1','0','0','0','0','0','0'},  
                 {'0','0','1','1','2','1','1','0'},  
                 {'0','1','0','0','0','1','0','1'},  
-                {'0','0','0','1','0','0','0','t'},  
+                {'0','0','0','1','0','0','0','x'},  
                 {'0','1','1','x','1','1','2','0'},  
                 {'0','0','1','0','0','1','0','0'},  
                 {'0','0','1','0','0','0','0','0'},  

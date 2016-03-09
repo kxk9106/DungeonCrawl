@@ -49,14 +49,14 @@ public class EnemyMovement : MonoBehaviour {
             }
         }
 
-        if (seekPlayer)
+        if (seekPlayer && (InstanceOfPlayer.gameObject != null))
         {
             this.gameObject.transform.LookAt(new Vector3(InstanceOfPlayer.transform.position.x, 1, InstanceOfPlayer.transform.position.z));
             Vector3 forwardMovement = this.transform.forward;
             forwardMovement.Scale(new Vector3(EnemySpeed, EnemySpeed, EnemySpeed));
             this.transform.position += forwardMovement;
         }
-        else
+        else if(InstanceOfPlayer.gameObject != null)
         {
             if (pathActive) //follow current path
             {

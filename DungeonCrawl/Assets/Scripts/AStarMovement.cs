@@ -261,7 +261,7 @@ public class AStarMovement : MonoBehaviour {
             {
                 exists = ClosedList.TryGetValue(posToCheck, out checkingTile); //make sure the tile isn't already on the closed list
 
-                if (!(exists) && (posToCheck[0] >= 0) && (posToCheck[0] < Map.GetLength(0)) && (posToCheck[1] >= 0) && (posToCheck[1] < Map.GetLength(1)) && (Map[posToCheck[0], posToCheck[1]] != '1')) //confirms tile is not on the closed list and checks if the tile position is a valid space
+                if (!(exists) && (posToCheck[0] >= 0) && (posToCheck[0] < Map.GetLength(0)) && (posToCheck[1] >= 0) && (posToCheck[1] < Map.GetLength(1)) && (Map[posToCheck[0], posToCheck[1]] != '1') && (Map[posToCheck[0], posToCheck[1]] != '2')) //confirms tile is not on the closed list and checks if the tile position is a valid space
                 {
                     
                     Array.Copy(m_current.coordinates, centerPosition, 2);
