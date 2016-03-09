@@ -15,6 +15,7 @@ public class Button : MonoBehaviour {
 	}
 	public void menuButton()
 	{
+		Debug.Log ("okay");
 		Application.LoadLevel("Level1");
 	}
 }
