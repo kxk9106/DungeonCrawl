@@ -23,16 +23,24 @@ public class IncreaseHealth : MonoBehaviour {
 	}
 
 	public void changeHealth(){
-		if (plScript.money > 8) {
-			plScript.money -= 8;
-			changeHealthReal();
+		if (plScript.money >= 8) {
+			if(temp < 2.6){
+				plScript.money -= 8;
+				changeHealthReal();
+			}
+
 
 		}
 
 	}
 
 	void changeHealthReal(){
-		plScript.playerHealth++;
+		if (plScript.playerHealth == 2.5) {
+			plScript.playerHealth = 3.0;
+		} else {
+			plScript.playerHealth++;
+		}
+
 		plTempHealth.text = "Health: " + plScript.playerHealth;
 		if(plTempHealth.text.Contains("3")){
 			//plAScript.playerHealth = 3;
