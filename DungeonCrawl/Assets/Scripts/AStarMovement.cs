@@ -39,7 +39,7 @@ public class AStarMovement : MonoBehaviour {
 
 	void Awake ()
 	{
-		InstanceOfGameManager = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<GameManager>();
+		InstanceOfGameManager = GameObject.FindGameObjectsWithTag("MainGo")[0].GetComponent<GameManager>();
         //InstanceOfPlayer = GameObject.FindGameObjectsWithTag("Player")[0];
 	}
 
