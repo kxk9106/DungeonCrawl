@@ -1571,6 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemySpeed: .0700000003
   HostilityDistance: 10
+  pursueDistance: 7
 --- !u!135 &1671567565
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour {
     int currentPathTarget = 0; // used to keep track of which point is next in line
     public float EnemySpeed; //speed of the enemies movement (set in prefab window)
     public int HostilityDistance; //from how far away (path steps)will they actively seek you
+    public int pursueDistance; //how far will the monsters sursue you from
     List<int[]> directions;
     int[] assumedPosition = new int[2];
     //Stack<int[]> directionStack;
@@ -65,10 +66,13 @@ public class EnemyMovement : MonoBehaviour {
                     //if enemy is not at current destination
                     if (/*((directions[currentPathTarget][0] < directions.ToArray().GetLength(0)) && (directions[currentPathTarget][1] < directions.ToArray().GetLength(1))) && */ (((int)this.transform.position.x) / 5 != directions[currentPathTarget][0]) || ((int)this.transform.position.z / 5 != directions[currentPathTarget][1]))//((((int)this.transform.position.x) / 5 != ((int)InstanceOfPlayer.transform.position.x) / 5) || ((int)this.transform.position.z / 5 != (int)InstanceOfPlayer.transform.position.z / 5))
                     {
-                        this.gameObject.transform.LookAt(new Vector3((directions[currentPathTarget][0] * 5) + 2.5f, 2, (directions[currentPathTarget][1] * 5) + 2.5f));
-                        Vector3 forwardMovement = this.transform.forward;
-                        forwardMovement.Scale(new Vector3(EnemySpeed, EnemySpeed, EnemySpeed));
-                        this.transform.position += forwardMovement;
+                        if (directions.Count < pursueDistance)
+                        {
+                            this.gameObject.transform.LookAt(new Vector3((directions[currentPathTarget][0] * 5) + 2.5f, 2, (directions[currentPathTarget][1] * 5) + 2.5f));
+                            Vector3 forwardMovement = this.transform.forward;
+                            forwardMovement.Scale(new Vector3(EnemySpeed, EnemySpeed, EnemySpeed));
+                            this.transform.position += forwardMovement;
+                        }
                     }
                     else //iterate to next point in path 
                     {
