@@ -23,9 +23,9 @@ public class IncreaseHealth : MonoBehaviour {
 	}
 
 	public void changeHealth(){
-		if (plScript.money >= 8) {
+		if (plScript.money >= 4) {
 			if(temp < 2.6){
-				plScript.money -= 8;
+				plScript.money -= 4;
 				changeHealthReal();
 			}
 
