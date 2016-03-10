@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyHurt : MonoBehaviour {
 	GameObject play;
 	Player plScript;
+    GameObject coin;
 	public double enemyHealth;
 
 	void Awake(){
@@ -46,6 +47,10 @@ public class EnemyHurt : MonoBehaviour {
 
 	void amIalive(){
 		if (enemyHealth == 0 || enemyHealth < 0) {
+            coin = Instantiate(Resources.Load("coin")) as GameObject;
+            coin.transform.position = this.transform.position;
+            Vector3 temp = new Vector3(0, 2, 0);
+            coin.transform.position += temp;
 			Destroy(this.gameObject);
 		}
 	}
